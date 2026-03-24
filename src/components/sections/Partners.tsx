@@ -14,16 +14,15 @@ export const Partners = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {[
-            { name: 'Cisco', desc: 'Networking' },
-            { name: 'Dell', desc: 'Enterprise Servers' },
+            { name: 'Dell', desc: 'Enterprise Solutions' },
             { name: 'HP', desc: 'Computing' },
-            { name: 'Fortinet', desc: 'Cybersecurity' },
-            { name: 'Ubiquiti', desc: 'Wireless' },
-            { name: 'MikroTik', desc: 'Routing' },
+            { name: 'Logitech', desc: 'Peripherals' },
+            { name: 'Samsung', desc: 'Technology' },
+            { name: 'Kingston Technology', desc: 'Storage' },
+            { name: 'Epson', desc: 'Imaging' },
             { name: 'Lenovo', desc: 'Workstations' },
-            { name: 'Kingston', desc: 'Storage' },
-            { name: 'TP-Link', desc: 'Access Points' },
-            { name: 'Epson', desc: 'Imaging' }
+            { name: 'TP-Link', desc: 'Networking' },
+            { name: 'Canon', desc: 'Imaging Solutions' }
           ].map((brand, idx) => (
             <motion.div 
               key={idx} 
