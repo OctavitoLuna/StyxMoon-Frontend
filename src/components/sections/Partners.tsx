@@ -1,44 +1,55 @@
 import { motion } from 'motion/react';
+import { PARTNERS } from '../../config/constants';
 
 export const Partners = () => {
+  const categories = [
+    { id: 'Infrastructure', label: 'Infraestructura y Hardware' },
+    { id: 'Communication', label: 'Comunicación y Colaboración' },
+    { id: 'Security', label: 'Seguridad y Confianza' },
+  ];
+
   return (
-    <section className="py-24 border-t border-[var(--card-border)] bg-[var(--bg-secondary)] relative overflow-hidden z-10">
-      {/* Decorative background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-[var(--accent-primary)] to-transparent opacity-30"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <span className="text-[var(--accent-primary)] font-semibold tracking-wider uppercase text-sm mb-3 block">Ecosistema Tecnológico</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">Partners Estratégicos</h2>
-          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg">Alianzas certificadas con los líderes globales en infraestructura y ciberseguridad.</p>
+    <section className="py-24 bg-white border-y border-gray-100">
+      <div className="container-custom">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <h2 className="section-title">Aliados y Tecnologías de Respaldo</h2>
+          <p className="section-subtitle mx-auto">
+            Trabajamos con tecnologías líderes y herramientas reconocidas a nivel mundial que respaldan nuestra eficiencia y garantizan la excelencia en cada proyecto.
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {[
-            { name: 'Dell', desc: 'Enterprise Solutions' },
-            { name: 'HP', desc: 'Computing' },
-            { name: 'Logitech', desc: 'Peripherals' },
-            { name: 'Samsung', desc: 'Technology' },
-            { name: 'Kingston Technology', desc: 'Storage' },
-            { name: 'Epson', desc: 'Imaging' },
-            { name: 'Lenovo', desc: 'Workstations' },
-            { name: 'TP-Link', desc: 'Networking' },
-            { name: 'Canon', desc: 'Imaging Solutions' }
-          ].map((brand, idx) => (
-            <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-              className="glass-card p-6 flex flex-col items-center justify-center text-center group hover:border-[var(--accent-primary)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(29,78,216,0.15)] cursor-pointer bg-[var(--bg-primary)]"
-            >
-              <div className="font-bold text-xl text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors mb-1">
-                {brand.name}
+
+        <div className="space-y-20">
+          {categories.map((cat, catIdx) => (
+            <div key={cat.id}>
+              <div className="flex items-center gap-4 mb-10">
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-[0.2em] whitespace-nowrap">{cat.label}</h3>
+                <div className="h-[1px] w-full bg-gray-100"></div>
               </div>
-              <div className="text-[10px] uppercase tracking-widest text-[var(--text-secondary)] font-medium">
-                {brand.desc}
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {PARTNERS.filter(p => p.category === cat.id).map((partner, idx) => (
+                  <motion.div
+                    key={partner.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: (catIdx * 0.1) + (idx * 0.05) }}
+                    className="group"
+                  >
+                    {/* Uniform Size Box: h-20 w-full */}
+                    <div className="h-24 w-full bg-gray-50/50 border border-gray-100 rounded-sm p-4 flex flex-col items-center justify-center hover:bg-white hover:shadow-sm hover:border-[var(--accent-primary)] transition-all duration-300">
+                      <span className="font-bold text-[var(--text-primary)] text-sm group-hover:text-[var(--accent-primary)] transition-colors leading-tight text-center">
+                        {partner.name}
+                      </span>
+                      {partner.description && (
+                        <span className="text-[9px] text-[var(--accent-secondary)] font-bold mt-1 uppercase tracking-tighter text-center leading-none">
+                          {partner.description}
+                        </span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

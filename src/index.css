@@ -1,72 +1,129 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* Classic/Serious Palette */
+  --color-styx-blue: rgb(27, 54, 93); /* #1B365D - Corporate Slate Blue */
+  --color-styx-red: rgb(138, 28, 49); /* #8A1C31 - Deep Corporate Crimson */
+  --color-styx-white: rgb(255, 255, 255);
+  --color-styx-dark: rgb(20, 20, 20);
+  --color-styx-grey: rgb(245, 245, 245);
 }
 
 @layer base {
   :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f4f6f8;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --accent-primary: #1d4ed8; /* Corporate Blue */
-    --accent-secondary: #0284c7; /* Corporate Light Blue */
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --card-border: rgba(15, 23, 42, 0.06);
-  }
+    --bg-primary: #FFFFFF;
+    --bg-secondary: rgb(245, 245, 245);
+    
+    /* Serious corporate Navy Backgrounds */
+    --navy-base: #151B24;
+    --navy-deep: #0B0E14;
+    --navy-light: #1E2532;
 
-  .dark {
-    --bg-primary: #0b0f19; /* Deep Navy */
-    --bg-secondary: #111827; /* Darker Slate */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-primary: #3b82f6;
-    --accent-secondary: #38bdf8;
-    --card-bg: rgba(17, 24, 39, 0.6);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: rgb(20, 20, 20);
+    --text-secondary: rgba(20, 20, 20, 0.7);
+    --accent-primary: rgb(27, 54, 93);
+    --accent-secondary: rgb(138, 28, 49);
   }
 
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: var(--font-sans);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-.glass-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--card-border);
-  border-radius: 1.25rem; /* More professional, less bubbly */
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 md:px-12;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  /* Sharper, serious buttons */
+  .btn-primary {
+    @apply relative bg-[var(--accent-primary)] text-white font-bold px-8 py-4 rounded-sm transition-all duration-300 hover:bg-[#11233e] hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 overflow-hidden uppercase tracking-wider text-sm;
+  }
+  
+  .btn-primary::after {
+    @apply content-[''] absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity;
+  }
+
+  .btn-accent {
+    @apply relative bg-[var(--accent-secondary)] text-white font-bold px-8 py-4 rounded-sm transition-all duration-300 hover:bg-[#681424] hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 overflow-hidden uppercase tracking-wider text-sm;
+  }
+
+  .btn-outline {
+    @apply border-2 border-white/20 text-white font-bold px-8 py-4 rounded-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40 active:scale-95 flex items-center justify-center gap-2 uppercase tracking-wider text-sm;
+  }
+
+  .section-title {
+    @apply text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tighter leading-[1.05] uppercase;
+  }
+  
+  .section-title-white {
+    @apply text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tighter leading-[1.05] uppercase text-white;
+  }
+  
+  .section-title-blue {
+    @apply text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tighter leading-[1.05] uppercase text-[var(--navy-deep)];
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl max-w-2xl mb-12 leading-relaxed opacity-80;
+  }
+
+  /* Sharp corporate cards */
+  .card-professional {
+    @apply bg-white p-8 md:p-12 shadow-sm border-t-4 border-[var(--navy-light)] hover:shadow-2xl hover:-translate-y-2 hover:border-[var(--accent-primary)] transition-all duration-300 relative overflow-hidden rounded-sm;
+  }
+
+  .card-dark {
+    @apply bg-[var(--navy-light)] p-8 md:p-12 shadow-2xl text-white border-b-4 border-transparent hover:border-[var(--accent-secondary)] hover:-translate-y-2 transition-all duration-300 relative overflow-hidden rounded-sm;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-primary)] via-blue-700 to-[var(--accent-secondary)];
+  }
 }
 
-.text-gradient {
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Background Utilities */
+.bg-deep-blue {
+  background-color: var(--navy-deep);
 }
 
-.bg-gradient-primary {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+.bg-pattern-light {
+  background-color: var(--bg-secondary);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+.bg-pattern-dark {
+  @apply relative;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-base) 50%, var(--navy-light) 100%);
 }
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+
+/* Texture & Patterns - much more subtle */
+.bg-grid-styx {
+  background-size: 60px 60px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
-::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 4px;
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl rounded-sm;
 }
